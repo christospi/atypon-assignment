@@ -24,12 +24,20 @@ class RNNClassifier:
         pass
 
     def train(self, samples, targets):
+        """
+        Train and evaluate the BILSTM classifier.
+        Parameters
+        ----------
+        samples
+        targets
+        """
         X = np.asarray(samples)
         Y = np.asarray(targets)
 
         print(X.shape)
         print(Y.shape)
 
+        # Split dataset in train/test of 80/20 % accordingly
         x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.2, random_state=42)
 
         tokenizer = Tokenizer(num_words=5000)
@@ -40,11 +48,13 @@ class RNNClassifier:
 
         vocab_size = len(tokenizer.word_index) + 1
 
+        # Pad sequences to max length
         x_train = pad_sequences(x_train, padding='post', maxlen=config.props['embeddings_max_length'])
         x_test = pad_sequences(x_test, padding='post', maxlen=config.props['embeddings_max_length'])
 
         embeddings_dictionary = dict()
 
+        # Load the word embeddings
         glove_file = open(config.props['embeddings'], encoding="utf8")
 
         for line in glove_file:
@@ -54,6 +64,7 @@ class RNNClassifier:
             embeddings_dictionary[word] = vector_dimensions
         glove_file.close()
 
+        # Encode inputs using GloVe embeddings
         embedding_matrix = zeros((vocab_size, config.props['embeddings_shape']))
         for word, index in tokenizer.word_index.items():
             embedding_vector = embeddings_dictionary.get(word)
@@ -63,6 +74,7 @@ class RNNClassifier:
         print('Train set:', x_train.shape, y_train.shape)
         print('Test set:', x_test.shape, y_test.shape)
 
+        # Build the RNN network
         model = Sequential()
         model.add(Input(shape=(config.props['embeddings_max_length'],)))
         model.add(Embedding(vocab_size, config.props['embeddings_shape'], weights=[embedding_matrix], trainable=False))
@@ -73,6 +85,7 @@ class RNNClassifier:
 
         print(model.summary())
 
+        # Early stopping mechanism to prevent overfitting
         early_stopping = EarlyStopping(monitor='val_loss', patience=10, restore_best_weights=True)
 
         history = model.fit(x_train, y_train, batch_size=128, epochs=60, verbose=1,
@@ -93,10 +106,27 @@ class RNNClassifier:
 
     @staticmethod
     def probas_to_classes(probabilities):
+        """
+        Returns OneHot array indicating if each label should be applied or not (if prob > 0.5)
+        Parameters
+        ----------
+        probabilities: probabilities as predicted from the classifier
+
+        Returns
+        -------
+        OneHot indicator array
+        """
         return (probabilities > 0.5).astype('int32')
 
     @staticmethod
     def calculate_performance(y_true, y_pred):
+        """
+        Calculate BILSTM classifier performance using R, P, F1, @K metrics
+        Parameters
+        ----------
+        y_true: targets
+        y_pred: predictions
+        """
         print(classification_report(y_true=y_true, y_pred=y_pred))
 
         print('@' * 36)
@@ -112,6 +142,12 @@ class RNNClassifier:
 
     @staticmethod
     def plot_performance(history):
+        """
+        Plots training performance using validation loss
+        Parameters
+        ----------
+        history: history object from keras model
+        """
         best_epoch = history.history['val_loss'].index(min(history.history['val_loss'])) + 1
 
         plt.figure(figsize=(10, 8))

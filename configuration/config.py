@@ -1,3 +1,7 @@
+"""
+Configuration file for training setup
+"""
+
 props = {
     "__model_options__": ["logreg", "bilstm"],
     "__embeddings_options__": ["glove.6B.50d.txt", "glove.6B.100d.txt"],

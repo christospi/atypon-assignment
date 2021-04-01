@@ -1,0 +1,128 @@
+ssh://chris@195.134.71.11:22/home/chris/anaconda3/envs/mltc/bin/python -u /home/chris/atypon-project/run_classifier.py
+2021-03-31 19:52:04.293360: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+(8251,)
+(8251, 20)
+Train set: (6600,) (6600, 20)
+Validation set: (826,) (826, 20)
+Test set: (825,) (825, 20)
+dict_keys(['memory', 'steps', 'verbose', 'vect', 'tfidf', 'clf', 'vect__analyzer', 'vect__binary', 'vect__decode_error', 'vect__dtype', 'vect__encoding', 'vect__input', 'vect__lowercase', 'vect__max_df', 'vect__max_features', 'vect__min_df', 'vect__ngram_range', 'vect__preprocessor', 'vect__stop_words', 'vect__strip_accents', 'vect__token_pattern', 'vect__tokenizer', 'vect__vocabulary', 'tfidf__norm', 'tfidf__smooth_idf', 'tfidf__sublinear_tf', 'tfidf__use_idf', 'clf__estimator__C', 'clf__estimator__class_weight', 'clf__estimator__dual', 'clf__estimator__fit_intercept', 'clf__estimator__intercept_scaling', 'clf__estimator__l1_ratio', 'clf__estimator__max_iter', 'clf__estimator__multi_class', 'clf__estimator__n_jobs', 'clf__estimator__penalty', 'clf__estimator__random_state', 'clf__estimator__solver', 'clf__estimator__tol', 'clf__estimator__verbose', 'clf__estimator__warm_start', 'clf__estimator', 'clf__n_jobs'])
+VALIDATION EVALUATION
+=====================
+(826,)
+(826, 20)
+Overall evaluation
+----------------------------------------------------
+micro    - Precision: 0.7364   Recall: 0.2029   F1: 0.3182
+/home/chris/anaconda3/envs/mltc/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1245: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+macro    - Precision: 0.7781   Recall: 0.1503   F1: 0.2256
+/home/chris/anaconda3/envs/mltc/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1245: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+weighted - Precision: 0.7752   Recall: 0.2029   F1: 0.2875
+----------------------------------------------------
+/home/chris/anaconda3/envs/mltc/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1245: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/chris/anaconda3/envs/mltc/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1245: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in samples with no predicted labels. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/chris/anaconda3/envs/mltc/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1245: UndefinedMetricWarning: Recall and F-score are ill-defined and being set to 0.0 in samples with no true labels. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+              precision    recall  f1-score   support
+
+           0       0.77      0.12      0.20        86
+           1       0.56      0.05      0.09        97
+           2       0.56      0.06      0.11       151
+           3       0.79      0.25      0.38       211
+           4       0.86      0.12      0.20       165
+           5       0.83      0.07      0.13        70
+           6       0.00      0.00      0.00        22
+           7       1.00      0.04      0.07        82
+           8       0.90      0.07      0.13       125
+           9       1.00      0.36      0.53        83
+          10       0.82      0.09      0.16       100
+          11       0.50      0.02      0.04        54
+          12       1.00      0.15      0.26        86
+          13       0.74      0.55      0.63       187
+          14       0.61      0.35      0.44       313
+          15       1.00      0.20      0.33        45
+          16       1.00      0.05      0.09       101
+          17       1.00      0.03      0.07        58
+          18       0.73      0.34      0.47       215
+          19       0.89      0.09      0.16        90
+
+   micro avg       0.74      0.20      0.32      2341
+   macro avg       0.78      0.15      0.23      2341
+weighted avg       0.78      0.20      0.29      2341
+ samples avg       0.33      0.19      0.23      2341
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+R@1: 0.1517 P@1: 0.4260 RP@1: 0.4260 NDCG@1: 0.4260
+R@2: 0.2503 P@2: 0.3642 RP@2: 0.3835 NDCG@2: 0.3919
+R@3: 0.3080 P@3: 0.3007 RP@3: 0.3582 NDCG@3: 0.3690
+R@4: 0.3745 P@4: 0.2786 RP@4: 0.3914 NDCG@4: 0.3840
+R@5: 0.4390 P@5: 0.2618 RP@5: 0.4431 NDCG@5: 0.4095
+R@6: 0.4939 P@6: 0.2475 RP@6: 0.4945 NDCG@6: 0.4347
+R@7: 0.5286 P@7: 0.2295 RP@7: 0.5286 NDCG@7: 0.4512
+R@8: 0.5424 P@8: 0.2075 RP@8: 0.5424 NDCG@8: 0.4579
+R@9: 0.5695 P@9: 0.1949 RP@9: 0.5695 NDCG@9: 0.4697
+R@10: 0.6169 P@10: 0.1884 RP@10: 0.6169 NDCG@10: 0.4881
+TEST EVALUATION
+=====================
+(825,)
+(825, 20)
+Overall evaluation
+----------------------------------------------------
+micro    - Precision: 0.7724   Recall: 0.2089   F1: 0.3289
+/home/chris/anaconda3/envs/mltc/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1245: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+macro    - Precision: 0.7755   Recall: 0.1415   F1: 0.2122
+/home/chris/anaconda3/envs/mltc/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1245: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+weighted - Precision: 0.7995   Recall: 0.2089   F1: 0.2971
+----------------------------------------------------
+/home/chris/anaconda3/envs/mltc/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1245: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/chris/anaconda3/envs/mltc/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1245: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in samples with no predicted labels. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/chris/anaconda3/envs/mltc/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1245: UndefinedMetricWarning: Recall and F-score are ill-defined and being set to 0.0 in samples with no true labels. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+              precision    recall  f1-score   support
+
+           0       0.87      0.13      0.23        99
+           1       0.56      0.05      0.10        96
+           2       0.91      0.07      0.12       153
+           3       0.82      0.25      0.38       227
+           4       0.84      0.14      0.24       151
+           5       1.00      0.03      0.05        80
+           6       0.00      0.00      0.00        17
+           7       1.00      0.06      0.11        71
+           8       0.78      0.06      0.11       116
+           9       0.83      0.29      0.42        84
+          10       0.95      0.18      0.30       107
+          11       1.00      0.02      0.04        54
+          12       0.86      0.07      0.14        80
+          13       0.83      0.57      0.68       209
+          14       0.63      0.32      0.43       302
+          15       1.00      0.03      0.05        40
+          16       1.00      0.11      0.19        93
+          17       0.00      0.00      0.00        48
+          18       0.74      0.38      0.50       229
+          19       0.90      0.09      0.17        99
+
+   micro avg       0.77      0.21      0.33      2355
+   macro avg       0.78      0.14      0.21      2355
+weighted avg       0.80      0.21      0.30      2355
+ samples avg       0.38      0.21      0.25      2355
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+R@1: 0.1691 P@1: 0.4837 RP@1: 0.4837 NDCG@1: 0.4837
+R@2: 0.2687 P@2: 0.3941 RP@2: 0.4072 NDCG@2: 0.4237
+R@3: 0.3315 P@3: 0.3224 RP@3: 0.3839 NDCG@3: 0.3999
+R@4: 0.3956 P@4: 0.2948 RP@4: 0.4146 NDCG@4: 0.4138
+R@5: 0.4613 P@5: 0.2761 RP@5: 0.4673 NDCG@5: 0.4397
+R@6: 0.5133 P@6: 0.2595 RP@6: 0.5154 NDCG@6: 0.4635
+R@7: 0.5440 P@7: 0.2385 RP@7: 0.5447 NDCG@7: 0.4777
+R@8: 0.5602 P@8: 0.2162 RP@8: 0.5605 NDCG@8: 0.4851
+R@9: 0.5833 P@9: 0.2016 RP@9: 0.5834 NDCG@9: 0.4953
+R@10: 0.6228 P@10: 0.1942 RP@10: 0.6228 NDCG@10: 0.5115
+
+Process finished with exit code 0

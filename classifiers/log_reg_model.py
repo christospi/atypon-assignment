@@ -15,29 +15,35 @@ class LogRegClassifier:
         pass
 
     def train(self, samples, targets):
+        """
+        Train and evaluate the Logistic Regression classifier.
+        Parameters
+        ----------
+        samples
+        targets
+        """
 
         # Available solvers (sag): ['liblinear', 'newton-cg', 'lbfgs', 'sag', 'saga']
         text_clf = Pipeline([
-            ('vect', CountVectorizer(ngram_range=(1, 5), max_features=400000, tokenizer=word_tokenize)),
+            ('vect', CountVectorizer(ngram_range=(1, 5), max_features=50000, tokenizer=word_tokenize)),
             ('tfidf', TfidfTransformer(use_idf=True)),
             ('clf', OneVsRestClassifier(LogisticRegression(multi_class='ovr', solver='sag', n_jobs=1,
                                         max_iter=100, verbose=0), n_jobs=8))
         ])
 
-        # Run Classifier
         X = np.asarray(samples)
         Y = np.asarray(targets)
 
         print(X.shape)
         print(Y.shape)
 
+        # Split dataset in train/val/test of 80/10/10 % accordingly
         x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.2, random_state=42)
         x_test, x_val, y_test, y_val = train_test_split(x_test, y_test, test_size=0.5, random_state=42)
 
         print('Train set:', x_train.shape, y_train.shape)
         print('Validation set:', x_val.shape, y_val.shape)
         print('Test set:', x_test.shape, y_test.shape)
-
         print(text_clf.get_params().keys())
 
         text_clf.fit(x_train, y_train)
@@ -57,9 +63,27 @@ class LogRegClassifier:
 
     @staticmethod
     def probas_to_classes(probabilities):
+        """
+        Returns OneHot array indicating if each label should be applied or not (if prob > 0.5)
+        Parameters
+        ----------
+        probabilities: probabilities as predicted from the classifier
+
+        Returns
+        -------
+        OneHot indicator array
+        """
         return (probabilities > 0.5).astype('int32')
 
     def calculate_performance(self, network, x, y_true):
+        """
+        Calculate Logistic Regression performance using R, P, F1, @K metrics
+        Parameters
+        ----------
+        network: classifier
+        x: samples
+        y_true: targets
+        """
         predictions = network.predict_proba(x)
         y_pred = self.probas_to_classes(predictions)
 

@@ -17,6 +17,11 @@ class MultilabelClassification:
         self.targets_dict = dict()
 
     def load_dataset_to_df(self):
+        """
+        Loads the dataset specified in config in two DataFrames, one for samples and one for targets.
+        The targets DF contains the labels in OneHot encoding.
+        """
+        # MultiLabelBinarizer used to encode targets as OneHot vector
         mlb = MultiLabelBinarizer()
         data = pd.read_json(self.dataset)
         self.samples = data['text']
@@ -26,6 +31,9 @@ class MultilabelClassification:
             self.targets_dict[i] = col
 
     def train_classifier(self):
+        """
+        Instantiates the selected classifier (as given in config file) and calls its train method.
+        """
         if config.props['model'] == 'logreg':
             classifier = LogRegClassifier()
         elif config.props['model'] == 'bilstm':
@@ -36,8 +44,13 @@ class MultilabelClassification:
         classifier.train(self.samples, self.targets)
 
     def print_data_stats(self, prefix='full_data_'):
-
-        to_plot = False
+        """
+        Generates plots describing the dataset.
+        Parameters
+        ----------
+        prefix: prefix to be used for each generated plot when saved.
+        """
+        to_plot = True
 
         # Plot 1
         # Plot labels frequency/occurrence in articles
